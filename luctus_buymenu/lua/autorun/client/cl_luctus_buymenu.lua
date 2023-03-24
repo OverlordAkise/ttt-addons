@@ -1,3 +1,5 @@
+--Luctus TTT Buymenu
+--Made by OverlordAkise
 
 local accent_col = Color(0, 195, 165)
 local wcFrame = nil

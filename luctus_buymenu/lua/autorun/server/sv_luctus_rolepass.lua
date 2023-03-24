@@ -1,4 +1,5 @@
-
+--Luctus TTT Buymenu
+--Made by OverlordAkise
 
 local function GetTraitorCount(ply_count)
     local traitor_count = math.floor(ply_count * GetConVar("ttt_traitor_pct"):GetFloat())

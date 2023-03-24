@@ -1,3 +1,5 @@
+--Luctus TTT Buymenu
+--Made by OverlordAkise
 
 util.AddNetworkString("luctus_buymenu_notify")
 util.AddNetworkString("luctus_buymenu_redeem")

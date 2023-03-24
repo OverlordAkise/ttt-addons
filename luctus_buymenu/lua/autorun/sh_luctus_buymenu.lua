@@ -1,3 +1,5 @@
+--Luctus TTT Buymenu
+--Made by OverlordAkise
 
 LUCTUS_BUYMENU_EQUIPMENT = {
     ["Shotguns"] = {
