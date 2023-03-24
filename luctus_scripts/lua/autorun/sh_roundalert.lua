@@ -1,3 +1,5 @@
+--Made by OverlordAkise
+
 if SERVER then
 
     util.AddNetworkString("round_alert")
@@ -22,4 +24,4 @@ else
 
 end
 
-print("[roundalert] sh loaded")
+print("[luctus_roundalert] sh loaded")

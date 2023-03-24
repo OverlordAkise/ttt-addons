@@ -1,3 +1,4 @@
+--Made by OverlordAkise
 
 local songs = {
     "https://luctus.at/fastdl/sounds/tekillya.mp3",

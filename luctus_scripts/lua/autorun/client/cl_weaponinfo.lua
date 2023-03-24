@@ -1,3 +1,5 @@
+--Made by OverlordAkise
+
 surface.CreateFont( "WpnInfoHead", {
     font = "Roboto",
     size = 130,

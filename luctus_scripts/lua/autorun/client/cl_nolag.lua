@@ -1,3 +1,5 @@
+--Made by OverlordAkise
+
 hook.Add("InitPostEntity","luctus_nolag",function()
     RunConsoleCommand("gmod_mcore_test", "1")
     RunConsoleCommand("mat_queue_mode", "-1")

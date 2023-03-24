@@ -1,3 +1,5 @@
+--Made by OverlordAkise
+
 if SERVER then
 
     util.AddNetworkString("luctus_roundinfo_start")

@@ -1,3 +1,4 @@
+--Made by OverlordAkise
 
 local wave = Material("models/props_combine/portalball001_sheet")
 local weapons = {}
@@ -24,8 +25,5 @@ timer.Create("luctus_highlight",1,0,function()
         end
     end
 end)
-
---hook.Remove("PostDrawTranslucentRenderables","luctus_test")
-
 
 print("[luctus_highlight] cl loaded!")

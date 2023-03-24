@@ -1,3 +1,5 @@
+--Made by OverlordAkise
+
 hook.Add("TTTPrepareRound", "luctus_nostartlag", function()
     timer.Simple(1,function()
         local c = 1
