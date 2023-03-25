@@ -69,14 +69,9 @@ net.Receive("luctus_buymenu_equip",function()
     categoryButtons:DockMargin(5,5,5,5)
     LuctusPrettifyScrollbar(categoryButtons:GetVBar())
     
-    local iconScroller = vgui.Create("DScrollPanel", wcFrame)
-    iconScroller:Dock(FILL)
-    LuctusPrettifyScrollbar(iconScroller:GetVBar())
-    
-    local iconList = vgui.Create("DIconLayout", iconScroller)
+    local iconList = vgui.Create("DScrollPanel", wcFrame)
     iconList:Dock(FILL)
-    iconList:SetSpaceY(5)
-    iconList:SetSpaceX(5)
+    LuctusPrettifyScrollbar(iconList:GetVBar())
     
     LuctusWCAddWeaponIcons(iconList, LUCTUS_BUYMENU_EQUIPMENT[firstCat],firstCat)
     --^ This needs to stay or the DIconLayout doesn't work
@@ -126,13 +121,21 @@ function LuctusWCAddWeaponIcons(iconList, weplist, catName)
         local wep = weapons.Get(wepClass)
         local panel = iconList:Add("DPanel")
         panel:SetSize(510,120)
+        panel:Dock(TOP)
         panel.wepname = wep and wep.PrintName or wepClass
         function panel:Paint(w,h)
             draw.SimpleTextOutlined(self.wepname, "DermaLarge", 130, 20, Color( 255, 255, 255, 255 ), TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP, 1, Color( 0, 0, 0, 255 ) )
             DrawHighlightBorder(self,w,h)
         end
+        
         local icon = vgui.Create("DModelPanel",panel)
         icon:SetModel(wep and wep.WorldModel or "models/error.mdl")
+        if wepClass == "detectivepass" then
+            icon:SetModel("models/ttt/deerstalker.mdl")
+        end
+        if wepClass == "traitorpass" then
+            icon:SetModel("models/weapons/w_c4_planted.mdl")
+        end
         icon:SetSize(120, 120)
         icon:Dock(LEFT)
         icon:SetLookAt(icon.Entity:GetPos()+Vector(0,0,0))
@@ -156,6 +159,7 @@ function LuctusWCAddWeaponIcons(iconList, weplist, catName)
         bg:SetPos(130,70)
         bg.wep = wepClass
         bg.wepvalid = wep and true or false
+        bg.ispass = catName == "-Passes" and true or false
         bg.catName = catName
         bg.cost = LUCTUS_BUYMENU_EQUIPMENT[catName][wepClass][1]
         bg.owned = ownedWeapons[bg.wep]
@@ -172,7 +176,7 @@ function LuctusWCAddWeaponIcons(iconList, weplist, catName)
             end
         end
         bg.DoClick = function(self)
-            if not self.wepvalid then return end
+            if not self.wepvalid and not self.ispass then return end
             if not self.owned then
                 --buy
                 if LocalPlayer():GetPoints() < self.cost then
@@ -185,6 +189,7 @@ function LuctusWCAddWeaponIcons(iconList, weplist, catName)
                     net.WriteString(self.wep)
                 net.SendToServer()
                 surface.PlaySound("ambient/levels/labs/coinslot1.wav")
+                if self.ispass then return end
                 self:SetText("Equip")
                 self.owned = true
             else

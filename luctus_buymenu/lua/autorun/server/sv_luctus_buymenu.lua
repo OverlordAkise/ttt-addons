@@ -2,7 +2,6 @@
 --Made by OverlordAkise
 
 util.AddNetworkString("luctus_buymenu_notify")
-util.AddNetworkString("luctus_buymenu_redeem")
 util.AddNetworkString("luctus_buymenu_buy")
 util.AddNetworkString("luctus_buymenu_equip")
 
@@ -21,20 +20,34 @@ hook.Add("TTTPrepareRound","luctus_announce_buymenu",function()
     end
 end)
 
-net.Receive("luctus_buymenu_redeem",function(len,ply)
-    local id = net.ReadString()
-    if not ply:GetPoints() > 0 then return end
-    if id == "traitor" then
-        ply.tpass = true
-        ply:SetPoints(ply:GetPoints()-1)
-        LuctusNotify("Successfully redeemed a traitor pass!")
+function LuctusBuyRedeemPass(ply,name,cost,levelreq)
+    if ply:GetLevel() < levelreq then
+        LuctusNotify(ply,"You don't have the required level for this pass!")
+        return
     end
-    if id == "detective" then
-        ply.tpass = true
-        ply:SetPoints(ply:GetPoints()-1)
-        LuctusNotify("Successfully redeemed a detective pass!")
+    if ply:GetPoints() < cost then
+        LuctusNotify(ply,"You can't afford this pass!")
+        return
     end
-end)
+    if name == "traitorpass" then
+        if ply.tpass then
+            LuctusNotify(ply,"You already have a traitorpass active!")
+            return
+        end
+        ply.tpass = true
+        ply:SubPoints(cost)
+        LuctusNotify(ply,"Successfully redeemed a traitorpass!")
+    end
+    if name == "detectivepass" then
+        if ply.dpass then
+            LuctusNotify(ply,"You already have a detectivepass active!")
+            return
+        end
+        ply.dpass = true
+        ply:SubPoints(cost)
+        LuctusNotify(ply,"Successfully redeemed a detectivepass!")
+    end
+end
 
 
 hook.Add("InitPostEntity","luctus_buymenu_sql",function()
@@ -121,12 +134,22 @@ end)
 net.Receive("luctus_buymenu_buy",function(len,ply)
     local cat = net.ReadString()
     local name = net.ReadString()
-    print("[luctus_buymenu]",ply,"wanted to buy",name)
+    print("[luctus_buymenu]",ply,"wanted to buy",cat,name)
     
     if not LUCTUS_BUYMENU_EQUIPMENT[cat] then return end
     if not LUCTUS_BUYMENU_EQUIPMENT[cat][name] then return end
     local cost = LUCTUS_BUYMENU_EQUIPMENT[cat][name][1]
+    local level = LUCTUS_BUYMENU_EQUIPMENT[cat][name][2]
     
+    if cat == "-Passes" then
+        LuctusBuyRedeemPass(ply,name,cost,level)
+        return
+    end
+    
+    if ply:GetLevel() < level then
+        LuctusNotify(ply,"You don't have the required level to buy this weapon!")
+        return
+    end
     if LuctusDoesPlayerOwnWeapon(ply,name) then 
         LuctusNotify(ply,"You already own that weapon!")
         return

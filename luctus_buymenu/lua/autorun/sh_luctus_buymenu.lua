@@ -17,6 +17,10 @@ LUCTUS_BUYMENU_EQUIPMENT = {
         ["weapon_ttt_m16"] = {3,5},
         ["weapon_zm_rifle"] = {3,20},
     },
+    ["-Passes"] = {
+        ["traitorpass"] = {2,10},
+        ["detectivepass"] = {1,5},
+    }
 }
 
 

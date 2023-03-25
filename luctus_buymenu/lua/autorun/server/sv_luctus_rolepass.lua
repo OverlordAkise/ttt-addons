@@ -69,7 +69,7 @@ function SelectRolesLuctus()
       if IsValid(passply) then
          --print("[DEBUG]","Pass T pick instead:",passply)
          passply:SetRole(ROLE_TRAITOR)
-         LuctusNotify(passply,"Your Traitor-Pass was used!")
+         LuctusNotify(passply,"Your traitorpass was used!")
          passply.tpass = nil
          table.remove(tpassplys,1)
          table.RemoveByValue(choices,passply)
@@ -114,7 +114,7 @@ function SelectRolesLuctus()
       local passply = not table.IsEmpty(dpassplys) and dpassplys[1] or nil
       if IsValid(passply) then
          passply:SetRole(ROLE_DETECTIVE)
-         LuctusNotify(passply,"Your Detective-Pass was used!")
+         LuctusNotify(passply,"Your detectivepass was used!")
          passply.dpass = nil
          table.remove(dpassplys,1)
          table.RemoveByValue(choices,passply)
