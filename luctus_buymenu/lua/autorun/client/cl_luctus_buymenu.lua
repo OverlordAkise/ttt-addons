@@ -46,6 +46,9 @@ net.Receive("luctus_buymenu_equip",function()
         draw.RoundedBox(0, 0, 0, w, h, Color(32, 34, 37))
         draw.RoundedBox(0, 1, 1, w - 2, h - 2, Color(54, 57, 62))
     end
+    function wcFrame:OnKeyCodePressed(key)
+        if key == KEY_F3 then wcFrame:Close() end
+    end
 
     local parent_x, parent_y = wcFrame:GetSize()
     local CloseButton = vgui.Create( "DButton", wcFrame )
