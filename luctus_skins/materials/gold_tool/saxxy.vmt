@@ -1,0 +1,21 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "gold_tool/gold_player"
+	"$envmap" "gold_tool/saxxy"
+
+	"$phong" "1"
+	"$phongexponent" "35"
+	"$phongboost" "1"	
+	"$lightwarptexture" "gold_tool/gold_lightwarp"
+	"$phongfresnelranges" "[11 1 8]"
+
+	"$rimlight" "1"		
+	"$rimlightexponent" "11"
+	"$rimlightboost" "5"
+
+	"$half" "0.5"
+
+	"$selfillum" "1"
+	"$selfIllumFresnel" "1"
+	"$selfIllumFresnelMinMaxExp" "[0 18 13]"
+}
