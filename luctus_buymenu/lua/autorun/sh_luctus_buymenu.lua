@@ -20,7 +20,7 @@ LUCTUS_BUYMENU_EQUIPMENT = {
     ["-Passes"] = {
         ["traitorpass"] = {2,10},
         ["detectivepass"] = {1,5},
-    }
+    },
     ["-Skins"] = {
         ["m9k_svt40_golden_lightning"] = {5,20},
         ["m9k_m416_golden_fire"] = {5,15},
